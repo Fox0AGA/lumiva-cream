@@ -48,35 +48,36 @@ h1{color:#d81b60;font-size:24px;margin:10px 0}
 <input type="tel" id="phone2" placeholder="اختياري - لو مش عايز تسيبه فاضي">
 
 <label>المحافظة *</label>
-<select id="gov" required>
-<option value="">اختاري المحافظة</option>
-<option>القاهرة</option>
-<option>الجيزة</option>
-<option>الإسكندرية</option>
-<option>الدقهلية</option>
-<option>البحيرة</option>
-<option>الشرقية</option>
-<option>المنوفية</option>
-<option>القليوبية</option>
-<option>الغربية</option>
-<option>كفر الشيخ</option>
-<option>دمياط</option>
-<option>بورسعيد</option>
-<option>الإسماعيلية</option>
-<option>السويس</option>
-<option>الفيوم</option>
-<option>بني سويف</option>
-<option>المنيا</option>
-<option>أسيوط</option>
-<option>سوهاج</option>
-<option>قنا</option>
-<option>الأقصر</option>
-<option>أسوان</option>
-<option>البحر الأحمر</option>
-<option>الوادي الجديد</option>
-<option>مطروح</option>
-<option>شمال سيناء</option>
-<option>جنوب سيناء</option>
+<select id="gov" required onchange="calcTotal()" style="width:100%;padding:14px;margin:8px 0;border-radius:12px;border:1px solid #ddd">
+<option value="">اختاري المحافظة * - سعر الشحن</option>
+<option value="القاهرة|100">القاهرة - شحن 100ج</option>
+<option value="الجيزة|100">الجيزة - شحن 100ج</option>
+<option value="القليوبية|100">القليوبية - شحن 100ج</option>
+<option value="الإسكندرية|100">الإسكندرية - شحن 100ج</option>
+<option value="البحيرة|100">البحيرة - شحن 100ج</option>
+<option value="كفر الشيخ|100">كفر الشيخ - شحن 100ج</option>
+<option value="الغربية|100">الغربية - شحن 100ج</option>
+<option value="المنوفية|100">المنوفية - شحن 100ج</option>
+<option value="الدقهلية|100">الدقهلية - شحن 100ج</option>
+<option value="دمياط|100">دمياط - شحن 100ج</option>
+<option value="الشرقية|100">الشرقية - شحن 100ج</option>
+<option value="بورسعيد|100">بورسعيد - شحن 100ج</option>
+<option value="الإسماعيلية|100">الإسماعيلية - شحن 100ج</option>
+<option value="السويس|100">السويس - شحن 100ج</option>
+<option value="الفيوم|80">الفيوم - شحن 80ج</option>
+<option value="بني سويف|80">بني سويف - شحن 80ج</option>
+<option value="المنيا|80">المنيا - شحن 80ج</option>
+<option value="أسيوط|80">أسيوط - شحن 80ج</option>
+<option value="سوهاج|80">سوهاج - شحن 80ج</option>
+<option value="قنا|70">قنا - شحن 70ج</option>
+<option value="الأقصر|50">الأقصر - شحن 50ج</option>
+<option value="أسوان|70">أسوان - شحن 70ج</option>
+<option value="البحر الأحمر|70">البحر الأحمر - شحن 70ج</option>
+<option value="الوادي الجديد|100">الوادي الجديد - شحن 100ج</option>
+<option value="مطروح|100">مطروح - شحن 100ج</option>
+<option value="شمال سيناء|100">شمال سيناء - شحن 100ج</option>
+<option value="جنوب سيناء|100">جنوب سيناء - شحن 100ج</option>
+</select>
 </select>
 
 <label>العنوان بالتفصيل *</label>
