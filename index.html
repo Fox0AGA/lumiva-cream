@@ -35,21 +35,17 @@ h1{color:#d81b60;font-size:24px;margin:10px 0}
 <!-- ده الزرار الجديد اللي طلبته -->
 <a href="./details.html" class="btn btn-outline">📖 اعرفي تفاصيل أكتر عن المنتج</a>
 
-<div class="form" id="order">
-<h3 style="text-align:center;color:#d81b60">اطلبي الآن 👇</h3>
+<div class="form" id="order" style="background:#f3e5f5;padding:20px;border-radius:20px;max-width:500px;margin:20px auto">
+<h3 style="text-align:center">👇 اطلبي الآن</h3>
 
-<label>الاسم ثلاثي *</label>
-<input type="text" id="name" placeholder="مثال: أحمد محمد علي" required>
+<input type="text" id="fullName" placeholder="الاسم ثلاثي *" style="width:100%;padding:14px;margin:8px 0;border-radius:12px;border:1px solid #ddd">
 
-<label>رقم الموبايل *</label>
-<input type="tel" id="phone1" placeholder="010xxxxxxxx" required>
+<input type="tel" id="phone1" placeholder="رقم الموبايل *" style="width:100%;padding:14px;margin:8px 0;border-radius:12px;border:1px solid #ddd">
 
-<label>رقم موبايل 2 (اختياري)</label>
-<input type="tel" id="phone2" placeholder="اختياري - لو مش عايز تسيبه فاضي">
+<input type="tel" id="phone2" placeholder="رقم موبايل 2 (اختياري)" style="width:100%;padding:14px;margin:8px 0;border-radius:12px;border:1px solid #ddd">
 
-<label>المحافظة *</label>
-<select id="gov" required onchange="calcTotal()" style="width:100%;padding:14px;margin:8px 0;border-radius:12px;border:1px solid #ddd">
-<option value="">اختاري المحافظة * - سعر الشحن</option>
+<select id="gov" onchange="calcTotal()" style="width:100%;padding:14px;margin:8px 0;border-radius:12px;border:1px solid #ddd">
+<option value="">اختاري المحافظة *</option>
 <option value="القاهرة|100">القاهرة - شحن 100ج</option>
 <option value="الجيزة|100">الجيزة - شحن 100ج</option>
 <option value="القليوبية|100">القليوبية - شحن 100ج</option>
@@ -78,38 +74,64 @@ h1{color:#d81b60;font-size:24px;margin:10px 0}
 <option value="شمال سيناء|100">شمال سيناء - شحن 100ج</option>
 <option value="جنوب سيناء|100">جنوب سيناء - شحن 100ج</option>
 </select>
+
+<input type="text" id="address" placeholder="العنوان بالتفصيل *" style="width:100%;padding:14px;margin:8px 0;border-radius:12px;border:1px solid #ddd">
+
+<select id="size" onchange="calcTotal()" style="width:100%;padding:14px;margin:8px 0;border-radius:12px;border:1px solid #ddd">
+<option value="">اختاري حجم العبوة *</option>
+<option value="200 مل|600">200 مل - 600ج</option>
+<option value="30 مل|160">30 مل - 160ج</option>
 </select>
 
-<label>العنوان بالتفصيل *</label>
-<input type="text" id="address" placeholder="الشارع - رقم البيت - علامة مميزة" required>
-
-<label>حجم العبوة *</label>
-<select id="size" required>
-<option value="">اختاري الحجم</option>
-<option value="200 مل - 600ج">200 مل - 600ج</option>
-<option value="30 مل - 160ج">30 مل - 160ج</option>
+<select id="qty" onchange="calcTotal()" style="width:100%;padding:14px;margin:8px 0;border-radius:12px;border:1px solid #ddd">
+<option value="1">الكمية: 1</option>
+<option value="2">الكمية: 2</option>
+<option value="3">الكمية: 3</option>
+<option value="4">الكمية: 4</option>
+<option value="5">الكمية: 5</option>
 </select>
 
-<a href="#" class="btn btn-green" onclick="sendOrder()">تأكيد الطلب على واتساب ✅</a>
-<p style="font-size:12px;text-align:center">* الحقول بعلامة * اجبارية - الدفع عند الاستلام</p>
+<div id="totalBox" style="display:none;background:#fff;border:2px dashed #ff4081;border-radius:12px;padding:12px;text-align:center">
+<p>المنتج: <span id="pPrice">0</span>ج × <span id="qShow">1</span> = <span id="pTotal">0</span>ج</p>
+<p>الشحن: <span id="sPrice">0</span>ج</p>
+<h3 style="color:#d81b60">الإجمالي: <span id="grandTotal">0</span>ج</h3>
+</div>
+
+<a href="#" onclick="sendOrder()" style="display:block;background:#25D366;color:#fff;text-align:center;padding:16px;border-radius:30px;text-decoration:none;font-weight:bold;margin-top:12px">تأكيد الطلب على واتساب</a>
 </div>
 
 <script>
-function sendOrder(){
-let name=document.getElementById('name').value;
-let p1=document.getElementById('phone1').value;
-let p2=document.getElementById('phone2').value;
-let gov=document.getElementById('gov').value;
-let addr=document.getElementById('address').value;
-let size=document.getElementById('size').value;
-
-if(!name || !p1 || !gov || !addr || !size){
-alert('من فضلك اكملي كل البيانات المطلوبة');
-return;
+let prod=0, ship=0, govName='', sizeName='';
+function calcTotal(){
+let g=document.getElementById('gov').value;
+let s=document.getElementById('size').value;
+let q=document.getElementById('qty').value;
+if(!g || !s) return;
+let gp=g.split('|'); let sp=s.split('|');
+govName=gp[0]; ship=parseInt(gp[1]);
+sizeName=sp[0]; prod=parseInt(sp[1]);
+let qty=parseInt(q);
+let prodTotal=prod*qty;
+document.getElementById('pPrice').innerText=prod;
+document.getElementById('qShow').innerText=qty;
+document.getElementById('pTotal').innerText=prodTotal;
+document.getElementById('sPrice').innerText=ship;
+document.getElementById('grandTotal').innerText=prodTotal+ship;
+document.getElementById('totalBox').style.display='block';
 }
-
-let msg=`طلب جديد LUMIVA%0A%0Aالاسم: ${name}%0Aموبايل 1: ${p1}%0Aموبايل 2: ${p2}%0Aالمحافظة: ${gov}%0Aالعنوان: ${addr}%0Aالحجم: ${size}`;
-window.open(`https://wa.me/201550785556?text=${msg}`, '_blank');
+function sendOrder(){
+let name=document.getElementById('fullName').value.trim();
+let p1=document.getElementById('phone1').value.trim();
+let p2=document.getElementById('phone2').value.trim()||'لا يوجد';
+let addr=document.getElementById('address').value.trim();
+let qty=document.getElementById('qty').value;
+if(name.split(' ').length<3){alert('اكتبي الاسم ثلاثي');return;}
+if(!p1||!document.getElementById('gov').value||!addr||!document.getElementById('size').value){alert('اكملي البيانات');return;}
+calcTotal();
+let prodTotal=prod*parseInt(qty);
+let grand=prodTotal+ship;
+let msg=`طلب LUMIVA%0Aالاسم: ${name}%0Aموبايل1: ${p1}%0Aموبايل2: ${p2}%0Aالمحافظة: ${govName}%0Aسعر الشحن: ${ship}ج%0Aالعنوان: ${addr}%0Aالحجم: ${sizeName}%0Aالكمية: ${qty}%0Aحساب المنتج: ${prod}×${qty}=${prodTotal}ج%0Aالإجمالي: ${grand}ج`;
+window.open(`https://wa.me/201550785556?text=${msg}`,'_blank');
 }
 </script>
 
