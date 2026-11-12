@@ -36,14 +36,81 @@ h1{color:#d81b60;font-size:24px;margin:10px 0}
 <a href="./details.html" class="btn btn-outline">📖 اعرفي تفاصيل أكتر عن المنتج</a>
 
 <div class="form" id="order">
-<h3 style="text-align:center">اطلبي الآن 👇</h3>
-<input type="text" placeholder="الاسم">
-<input type="tel" placeholder="رقم الموبايل">
-<select><option>اختر حجم العبوة</option><option>200 مل - 600ج</option><option>30 مل - 160ج</option></select>
-<input type="text" placeholder="المحافظة والعنوان">
-<a href="https://wa.me/201234567890" class="btn btn-green">تأكيد الطلب على واتساب</a>
-<p style="font-size:12px;text-align:center">الدفع عند الاستلام - شحن لجميع المحافظات</p>
+<h3 style="text-align:center;color:#d81b60">اطلبي الآن 👇</h3>
+
+<label>الاسم ثلاثي *</label>
+<input type="text" id="name" placeholder="مثال: أحمد محمد علي" required>
+
+<label>رقم الموبايل *</label>
+<input type="tel" id="phone1" placeholder="010xxxxxxxx" required>
+
+<label>رقم موبايل 2 (اختياري)</label>
+<input type="tel" id="phone2" placeholder="اختياري - لو مش عايز تسيبه فاضي">
+
+<label>المحافظة *</label>
+<select id="gov" required>
+<option value="">اختاري المحافظة</option>
+<option>القاهرة</option>
+<option>الجيزة</option>
+<option>الإسكندرية</option>
+<option>الدقهلية</option>
+<option>البحيرة</option>
+<option>الشرقية</option>
+<option>المنوفية</option>
+<option>القليوبية</option>
+<option>الغربية</option>
+<option>كفر الشيخ</option>
+<option>دمياط</option>
+<option>بورسعيد</option>
+<option>الإسماعيلية</option>
+<option>السويس</option>
+<option>الفيوم</option>
+<option>بني سويف</option>
+<option>المنيا</option>
+<option>أسيوط</option>
+<option>سوهاج</option>
+<option>قنا</option>
+<option>الأقصر</option>
+<option>أسوان</option>
+<option>البحر الأحمر</option>
+<option>الوادي الجديد</option>
+<option>مطروح</option>
+<option>شمال سيناء</option>
+<option>جنوب سيناء</option>
+</select>
+
+<label>العنوان بالتفصيل *</label>
+<input type="text" id="address" placeholder="الشارع - رقم البيت - علامة مميزة" required>
+
+<label>حجم العبوة *</label>
+<select id="size" required>
+<option value="">اختاري الحجم</option>
+<option value="200 مل - 600ج">200 مل - 600ج</option>
+<option value="30 مل - 160ج">30 مل - 160ج</option>
+</select>
+
+<a href="#" class="btn btn-green" onclick="sendOrder()">تأكيد الطلب على واتساب ✅</a>
+<p style="font-size:12px;text-align:center">* الحقول بعلامة * اجبارية - الدفع عند الاستلام</p>
 </div>
+
+<script>
+function sendOrder(){
+let name=document.getElementById('name').value;
+let p1=document.getElementById('phone1').value;
+let p2=document.getElementById('phone2').value;
+let gov=document.getElementById('gov').value;
+let addr=document.getElementById('address').value;
+let size=document.getElementById('size').value;
+
+if(!name || !p1 || !gov || !addr || !size){
+alert('من فضلك اكملي كل البيانات المطلوبة');
+return;
+}
+
+let msg=`طلب جديد LUMIVA%0A%0Aالاسم: ${name}%0Aموبايل 1: ${p1}%0Aموبايل 2: ${p2}%0Aالمحافظة: ${gov}%0Aالعنوان: ${addr}%0Aالحجم: ${size}`;
+window.open(`https://wa.me/201550785556?text=${msg}`, '_blank');
+}
+</script>
 
 <a href="./reviews.html" class="btn btn-outline">⭐ شوفي رأي البنات اللي اشترت</a>
 </div>
