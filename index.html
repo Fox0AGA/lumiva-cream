@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMIVA By AGA</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Tahoma,Arial,sans-serif}
+body{background:#fff5f8;color:#333;line-height:1.7}
+.h{background:#fff;text-align:center;padding:18px 12px;border-bottom:3px solid #ff8fab}
+.badge{background:#ffe4ec;color:#ff3f7f;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;display:inline-block}
+.h h1{font-size:22px;margin:10px 0;color:#222}
+.h h1 span{color:#ff3f7f}
+.img{width:92%;max-width:320px;border-radius:16px;margin:12px auto;display:block;border:2px solid #fff}
+.prices{display:flex;gap:8px;justify-content:center;margin:12px 0}
+.p{background:#fff;border:2px solid #ffb3c6;border-radius:12px;padding:8px 14px;text-align:center;cursor:pointer;min-width:130px}
+.p.on{background:#ff3f7f;color:#fff;border-color:#ff3f7f}
+.tot{background:#fff;border:1px dashed #ff3f7f;border-radius:10px;padding:8px;max-width:320px;margin:8px auto;text-align:center;font-weight:700;font-size:14px}
+.sec{max-width:500px;margin:auto;padding:12px}
+.tt{font-weight:800;margin:14px 0 6px;color:#222;background:#ffe4ec;display:inline-block;padding:4px 10px;border-radius:8px;font-size:15px;border-right:4px solid #ff3f7f}
+.box{background:#fff;border:1px solid #ffe0e8;border-radius:12px;padding:12px;margin-bottom:10px;font-size:14px}
+.box li{list-style:none;margin:4px 0}
+.form{border:2px solid #ff3f7f;border-radius:14px;padding:14px}
+.form h3{text-align:center;margin-bottom:8px;font-size:18px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #ffb3c6;border-radius:10px;margin:5px 0;font-size:14px;outline:none}
+.btn{width:100%;background:#ff3f7f;color:#fff;border:none;padding:13px;border-radius:12px;font-size:16px;font-weight:800;margin-top:8px;cursor:pointer}
+</style>
+</head>
+<body>
+<script>
+const C={
+w:"201550785556",
+img:"https://via.placeholder.com/400x400/ffc2d6/000?text=LUMIVA",
+prices:{"30":{n:"30 مل",o:190,now:160},"200":{n:"200 مل - شهرين",o:900,now:600}},
+ship:{"القاهرة":100,"الجيزة":100,"القليوبية":100,"الإسكندرية":100,"البحيرة":100,"كفر الشيخ":100,"الغربية":100,"المنوفية":100,"الدقهلية":100,"دمياط":100,"الشرقية":100,"بورسعيد":100,"الإسماعيلية":100,"السويس":100,"الفيوم":80,"بني سويف":80,"المنيا":80,"أسيوط":80,"سوهاج":80,"قنا":70,"الأقصر":50,"أسوان":70,"البحر الأحمر":70,"الوادي الجديد":100,"مطروح":100,"شمال سيناء":100,"جنوب سيناء":100}
+}
+</script>
+
+<div class="h">
+<div class="badge">👑 LUMIVA By AGA - طبيعي 100%</div>
+<h1>سر التفتيح الآمن <span>هتشوفيه بنفسك</span> ✨</h1>
+<img id="im" class="img" src="" alt="">
+<div class="prices" id="pr"></div>
+<div class="tot" id="tot">اختاري الحجم والمحافظة</div>
+</div>
+
+<div class="sec">
+<div class="tt">💖 معمول ليكي</div>
+<div class="box">عروسة وفرحك قرب؟ زهقتي من كريمات بتسمر؟ كنتى حامل وجسمك اسمر؟ <b style="color:#ff3f7f">لوميفا ليكي</b></div>
+
+<div class="tt">✨ بيعمل ايه</div>
+<div class="box">
+<li>☀️ تفتيح وتوحيد لون البشرة</li>
+<li>💫 تقليل التصبغات والبقع</li>
+<li>⚖️ توحيد الجسم والمناطق الحساسة</li>
+<li>💖 نضارة من أول اسبوع</li>
+<li>💧 ترطيب بزبدة الشيا</li>
+</div>
+
+<div class="tt">📦 الشحن</div>
+<div class="box">🚚 من يوم لـ 3 أيام - جميع المحافظات - دفع عند الاستلام<br><span id="sl" style="font-size:11px;opacity:.7"></span></div>
+
+<div class="form">
+<h3>📝 اطلبي الآن</h3>
+<input id="nm" placeholder="الاسم ثلاثي *">
+<input id="ph1" placeholder="رقم الهاتف الأساسي *">
+<input id="ph2" placeholder="رقم إضافي (اختياري)">
+<select id="gv"><option value="">اختاري المحافظة *</option></select>
+<textarea id="ad" placeholder="العنوان *"></textarea>
+<select id="sz"><option value="">اختاري الحجم *</option><option value="30">30 مل - 160ج</option><option value="200">200 مل - 600ج</option></select>
+<button class="btn" onclick="go()">✅ تأكيد - واتساب</button>
+</div>
+</div>
+
+<script>
+im=document.getElementById('im'); im.src=C.img;
+let s="200",g="";
+const pr=document.getElementById('pr'), gv=document.getElementById('gv'), sz=document.getElementById('sz'), tot=document.getElementById('tot');
+function dr(){pr.innerHTML="";for(let k in C.prices){let v=C.prices[k];let d=document.createElement('div');d.className='p'+(k==s?' on':'');d.innerHTML=v.n+'<br><small><s>'+v.o+'</s> '+v.now+'ج</small>';d.onclick=()=>{s=k;sz.value=k;dr();cl()};pr.appendChild(d)}}
+function dg(){for(let k in C.ship){let o=document.createElement('option');o.value=k;o.textContent=k+' - '+C.ship[k]+'ج';gv.appendChild(o)} document.getElementById('sl').innerHTML=Object.entries(C.ship).map(x=>x[0]+':'+x[1]+'ج').join(' • ')}
+function cl(){let p=C.prices[s].now, sh=C.ship[g]||0; tot.innerHTML=g?`المنتج ${p} + شحن ${sh} = <b>${p+sh}ج</b>`:`المنتج ${p}ج - اختاري المحافظة`}
+gv.addEventListener('change',e=>{g=e.target.value;cl()}); sz.addEventListener('change',e=>{s=e.target.value;dr();cl()});
+dr();dg();cl();
+function go(){
+let n=nm.value.trim(), p1=ph1.value.trim(), p2=ph2.value.trim(), gg=gv.value, a=ad.value.trim(), ss=sz.value;
+if(!n||!p1||!gg||!a||!ss){alert('كملي البيانات *');return}
+let pr=C.prices[ss].now, sh=C.ship[gg], tt=pr+sh, nn=C.prices[ss].n;
+let ph=`الهاتف1:${p1}`; if(p2) ph+=` - الهاتف2:${p2}`;
+let msg=`طلب LUMIVA%0Aالاسم:${n}%0A${ph}%0Aمحافظة:${gg}%0Aعنوان:${a}%0Aمنتج:${nn}%0Aسعر:${pr}ج%0Aشحن:${sh}ج%0Aاجمالي:${tt}ج`;
+open(`https://wa.me/${C.w}?text=${msg}`,'_blank')
+}
+</script>
+</body>
+</html>
